@@ -3,10 +3,12 @@ import axios from 'axios'
 export function request(config) {
     //第一步创建axios实例
     const instance = axios.create({
-        baseURL: 'http://123.207.32.32:8000/',
+        //baseURL: 'http://123.207.32.32:8000/',
+        baseURL: 'http://yapi.weilaigongzuo.com/mock/441',
         timeout: 5000
     })
 
+    //请求拦截器
     instance.interceptors.request.use(config => {
         return config
     }, err => {

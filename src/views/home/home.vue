@@ -1,13 +1,18 @@
 <template>
   <div id="home">
+    <!-- 这是导航 -->
     <navbar class="home-nav">
       <div slot="content">购物街</div>
     </navbar>
+    <!-- 下面 -->
+    <tabControl :titles='["流行","新款","精品"]'></tabControl>
   </div>
 </template>
 <script>
 import navbar from "components/common/navbar/NavBar";
 import { getHomeMultidata } from "network/home";
+
+import tabControl from "components/content/tabControl/tabControl"
 export default {
   data() {
     return {
@@ -17,12 +22,13 @@ export default {
   created() {
     //请求多个数据
     getHomeMultidata().then(res => {
-      this.result = res;
+      this.result = res.data;
       console.log(res);
     });
   },
   components: {
-    navbar
+    navbar,
+    tabControl
   }
 };
 </script>
