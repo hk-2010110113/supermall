@@ -19,3 +19,18 @@ export function getHomeMultidata() {
 //     newsSpecialsList: `${API}/zhihu/news_specials/list`,
 //     zhuanlanCard: `${API}/zhihu/zhuanlan-card`
 // };
+
+export function getHomePopData(page,type) {
+    return request({
+        //url: '/home/multidata',
+        //url:'/zhihu/recommend',
+        url: '/zhihu/hot-select',    //top10 热门
+        params:{
+            page:page,
+            type:type
+        }
+        //url:'/zhihu/hot-list',       //分类，科学，数码，体育等
+        //url: '/zhihu/news_specials/list', //新闻列表
+        //url:'/zhihu/zhuanlan-card',   //详细内容
+    })
+}

@@ -4,19 +4,91 @@
     <navbar class="home-nav">
       <div slot="content">购物街</div>
     </navbar>
-    <!-- 下面 -->
-    <tabControl :titles='["流行","新款","精品"]'></tabControl>
+    <div style="padding-top:44px;">
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+
+      <!-- 下面 -->
+      <tabControl class="tab-control" :titles="['流行','新款','精品']"></tabControl>
+      <goodslist :goods='goods.pop.list'></goodslist>
+
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+      <p>哈哈哈哈哈</p>
+    </div>
   </div>
 </template>
 <script>
 import navbar from "components/common/navbar/NavBar";
-import { getHomeMultidata } from "network/home";
-
-import tabControl from "components/content/tabControl/tabControl"
+import { getHomeMultidata, getHomePopData } from "network/home";
+import goodslist from "components/content/goods/goodsList";
+import tabControl from "components/content/tabControl/tabControl";
 export default {
   data() {
     return {
-      result: null
+      result: null,
+      goods: {
+        pop: {
+          page: 0,
+          list: []
+        },
+        new: {
+          page: 0,
+          list: []
+        },
+        sell: {
+          page: 0,
+          list: []
+        }
+      }
     };
   },
   created() {
@@ -25,16 +97,37 @@ export default {
       this.result = res.data;
       console.log(res);
     });
+    this.getpopData("pop");
+    // this.getpopData("news");
+    // this.getpopData("pop");
   },
   components: {
     navbar,
-    tabControl
+    tabControl,
+    goodslist
+  },
+  methods: {
+    //流行的数据
+    getpopData(type) {
+      const page = this.goods[type].page + 1;
+      getHomePopData(page, type).then(res => {
+        this.goods[type].list.push(...res.top_search.words);
+        this.goods[type].page += 1;
+      });
+    }
   }
 };
 </script>
 <style scoped>
 .home-nav {
+  width: 100%;
+  position: fixed;
   color: white;
   background-color: var(--color-tint);
+}
+.tab-control {
+  position: sticky;
+  top: 44px;
+  background-color: #fff;
 }
 </style>
