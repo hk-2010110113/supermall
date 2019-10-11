@@ -19,50 +19,51 @@
       <p>哈哈哈哈哈</p>
 
       <!-- 下面 -->
-      <tabControl class="tab-control" :titles="['流行','新款','精品']"></tabControl>
-      <goodslist :goods='goods.pop.list'></goodslist>
-
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
-      <p>哈哈哈哈哈</p>
+      <tabControl @tabClick="tabClick" class="tab-control" :titles="['流行','新款','精品']"></tabControl>
+      <goodslist :goods="showGoods"></goodslist>
+      <div>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+        <p>哈哈哈哈哈</p>
+      </div>
     </div>
   </div>
 </template>
@@ -88,7 +89,8 @@ export default {
           page: 0,
           list: []
         }
-      }
+      },
+      currentType: "pop"
     };
   },
   created() {
@@ -106,6 +108,11 @@ export default {
     tabControl,
     goodslist
   },
+  computed: {
+    showGoods() {
+      return this.goods[this.currentType].list;
+    }
+  },
   methods: {
     //流行的数据
     getpopData(type) {
@@ -114,6 +121,22 @@ export default {
         this.goods[type].list.push(...res.top_search.words);
         this.goods[type].page += 1;
       });
+    },
+    //事件监听相关的方法
+    tabClick(index) {
+      switch (index) {
+        case 0:
+          this.currentType = "pop";
+          break;
+        case 1:
+          this.currentType = "new";
+          break;
+        case 2:
+          this.currentType = "sell";
+          break;
+        default:
+          break;
+      }
     }
   }
 };

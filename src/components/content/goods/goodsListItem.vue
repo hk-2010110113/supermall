@@ -1,22 +1,21 @@
 <template>
-    <div class="goods-item">  
-        <!-- <ul>
-            <li v-for="(good,index) in goods" :key="index">{{good.query}}</li>
-        </ul>    -->
-    </div>
+  <div class="goods-item">
+    <ul>
+      <li>{{goodsItem}}</li>
+    </ul>
+  </div>
 </template>
 <script>
 export default {
-    props:{
-        goodsItem:{
-            type:String,
-            default(){
-                return []
-            }
-        }
+  props: {
+    goodsItem: {
+      type: String,
+      default() {
+        return [];
+      }
     }
-}
+  }
+};
 </script>
 <style scoped>
-
 </style>
