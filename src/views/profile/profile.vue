@@ -56,14 +56,21 @@
   </div>
 </template>
 <script>
+import BScroll from '@better-scroll/core';
 export default {
   data() {
     return {
+      scroll:''
     };
   },
   mounted() {
+    this.scroll = new BScroll('.wrapper',{
+    })
   },
   methods:{
+    alert(){
+      console.log("1")
+    }
   }
 };
 </script>
@@ -71,5 +78,6 @@ export default {
 .wrapper {
   height: 400px;
   background-color: pink;
+  overflow: hidden;
 }
 </style>
