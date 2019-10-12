@@ -18,8 +18,9 @@
       <p>哈哈哈哈哈</p>
       <p>哈哈哈哈哈</p>
 
-      <!-- 下面 -->
+      <!-- tab切换 -->
       <tabControl @tabClick="tabClick" class="tab-control" :titles="['流行','新款','精品']"></tabControl>
+      <!-- tab切换时，下面显示的页面 -->
       <goodslist :goods="showGoods"></goodslist>
       <div>
         <p>哈哈哈哈哈</p>
